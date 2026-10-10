@@ -1,0 +1,2 @@
+import { trainSharedLab } from '../../lab-state.mjs';
+export default function handler(req,res){if(req.method!=='POST')return res.status(405).json({error:'method_not_allowed'});let body='';req.on('data',chunk=>body+=chunk);req.on('end',()=>{let input={};try{input=body?JSON.parse(body):{};}catch{return res.status(400).json({error:'invalid_json'});}res.setHeader('Cache-Control','no-store');res.status(200).json({...trainSharedLab(input.epochs),shared:true,persistence:'vercel-instance'});});}
