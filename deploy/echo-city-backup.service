@@ -1,0 +1,10 @@
+[Unit]
+Description=Back up Echo City state
+After=echo-city.service
+
+[Service]
+Type=oneshot
+User=root
+Environment=ECHO_STATE_FILE=/var/lib/echo-city/world.json
+Environment=ECHO_BACKUP_DIR=/var/backups/echo-city
+ExecStart=/opt/echo-city/scripts/backup-state.sh

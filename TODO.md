@@ -1,9 +1,11 @@
-# Echo City — New Life Simulation
+# صدى المدينة — محاكاة حياة
 
-- [x] Replace the marketing landing page with an actual city-simulation interface.
-- [x] Start a new season with 18 original citizens, new names, jobs, needs, personalities, beliefs, goals, memories, and relationships.
-- [x] Add a procedurally drawn original Pixel Art city map with moving citizens and responsive desktop/mobile layout.
-- [x] Add server-managed shared simulation ticks, life events, reset-new-life action, citizens inspector, poll, daily log, bonds, and about views.
-- [x] Run the open Qwen2.5-0.5B ONNX model in each visitor's browser through Transformers.js, without API keys.
-- [x] Move simulation ticks to the server so all visitors connected to one server instance see the same city timeline.
-- [x] Finish visual and functional validation after the new interface is running.
+- [x] استبدال الواجهة المنسوخة بتصميم عربي أصلي RTL، تخطيط تحريري فاتح، وخريطة مرسومة للمشروع.
+- [x] تعريب أسماء السكان الـ١٨ ووظائفهم وطباعهم وأهدافهم وأحداث المدينة والصحيفة.
+- [x] إظهار ١٨ علامة قابلة للاختيار على الخريطة، مع ملفات الشخصيات والأقسام المتجاوبة.
+- [x] تشغيل نبضات محاكاة واحدة على الخادم؛ جميع الزوار على العملية نفسها يرون الجدول والحالة نفسيهما.
+- [x] حفظ الحالة كتابةً ذرية بعد كل نبضة واستعادتها عند تشغيل الخادم، مع فحص صحةٍ ونسخة احتياطية يومية اختيارية.
+- [x] إبقاء الحوار بالعربية بنموذج Qwen محلي داخل متصفح كل زائر دون مفتاح سري، مع الإفصاح عن كبر تنزيل النموذج وحدود الاتصال.
+- [x] إخفاء إعادة الضبط العام افتراضيًا ومنع endpoint إلا بصلاحية تشغيل صريحة.
+- [x] إضافة قوالب systemd وDocker/Compose لإعادة التشغيل والحفظ على مضيف دائم؛ لا تدّعي الملفات ضمان تشغيل ١٠٠ سنة.
+- [x] اجتياز اختبارات المحاكاة والحفظ والاستعادة وفحوص JavaScript والمعاينة والتفاعلات الأساسية.

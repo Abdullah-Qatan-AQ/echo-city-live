@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Echo City state backup
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=10m
+Unit=echo-city-backup.service
+
+[Install]
+WantedBy=timers.target

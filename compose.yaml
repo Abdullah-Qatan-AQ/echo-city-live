@@ -1,0 +1,22 @@
+services:
+  echo-city:
+    build: .
+    image: echo-city:latest
+    container_name: echo-city
+    restart: unless-stopped
+    init: true
+    environment:
+      PORT: "3000"
+      ECHO_STATE_FILE: /data/world.json
+    ports:
+      - "3000:3000"
+    volumes:
+      - echo-city-state:/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+volumes:
+  echo-city-state:

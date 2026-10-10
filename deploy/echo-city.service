@@ -1,0 +1,27 @@
+[Unit]
+Description=Echo City shared simulation server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=echocity
+Group=echocity
+WorkingDirectory=/opt/echo-city
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=ECHO_STATE_FILE=/var/lib/echo-city/world.json
+ExecStart=/usr/bin/node /opt/echo-city/server.mjs
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+StateDirectory=echo-city
+StateDirectoryMode=0750
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/echo-city
+
+[Install]
+WantedBy=multi-user.target

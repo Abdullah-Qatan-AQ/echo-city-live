@@ -1,44 +1,98 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#09131d" />
-  <meta name="description" content="Echo City — a living world of autonomous minds." />
-  <title>Echo City — New Life Simulation</title>
+  <meta name="theme-color" content="#f4f1e8" />
+  <meta name="description" content="صدى المدينة — محاكاة عربية لعالم صغير تتغيّر حكاياته مع كل نبضة." />
+  <title>صدى المدينة — عالمٌ يتغيّر</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <div class="app-shell" id="app">
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Echo City home"><span class="brand-mark"><i></i><i></i><i></i></span><span><strong>ECHO CITY</strong><small>NEW LIFE SIMULATION</small></span></a>
-      <div class="top-meta"><span class="live-dot"></span><span id="connectionLabel">LIVE</span><span class="world-time" id="worldTime">DAY 01 · 07:12</span></div>
-      <nav class="top-actions" aria-label="World actions"><button class="top-link" type="button" data-view="history">History</button><button class="top-link" type="button" data-view="ranks">Ranks</button><button class="sound-button" type="button" id="soundButton" aria-pressed="false">Sound off</button><button class="reset-button" type="button" id="resetButton">Begin again</button></nav>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="العودة إلى صدى المدينة">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M5 34V19h7v15M18 34V9h8v25M31 34V15h8v19"/><path d="M3 38h38"/></svg></span>
+        <span class="brand-copy"><strong>صدى المدينة</strong><small>حكاياتٌ تمشي على مهل</small></span>
+      </a>
+      <div class="header-status"><span class="status-pulse"></span><span id="connectionLabel">متصل الآن</span><span class="status-divider"></span><span id="worldTime">اليوم ٠١ · ٠٧:١٢</span></div>
+      <nav class="header-actions" aria-label="إجراءات المدينة">
+        <button class="quiet-action" type="button" data-view="history">ذاكرة المدينة</button>
+        <button class="quiet-action" type="button" data-view="ranks">الأثر</button>
+        <button class="quiet-action sound-button" type="button" id="soundButton" aria-pressed="false">الصوت: متوقف</button>
+        <button class="reset-button" type="button" id="resetButton">بدء حكاية جديدة</button>
+      </nav>
     </header>
 
-    <main class="city-layout">
-      <section class="map-stage" aria-label="Echo City live map">
-        <div class="map-toolbar"><div><span class="eyebrow">LIVE CITY / SEASON 01</span><h1>THE FIRST MORNING</h1></div><div class="map-tools"><span class="population" id="populationLabel">18 CITIZENS</span><span class="weather"><i></i><span id="weatherLabel">CLEAR</span></span><button class="icon-button" type="button" id="zoomButton" aria-label="Zoom map" aria-pressed="false">＋</button></div></div>
-        <div class="map-frame"><canvas id="cityMap" aria-label="Interactive map of Echo City"></canvas><div class="map-overlay map-overlay--top"><span>LIVE MAP / 001</span><span id="tickLabel">TICK 0000</span></div><div class="map-overlay map-overlay--bottom"><span><i class="legend-dot citizen-dot"></i> PEOPLE</span><span><i class="legend-dot venue-dot"></i> PLACES</span><span><i class="legend-dot selected-dot"></i> SELECTED</span></div><div class="selected-marker" id="selectedMarker" hidden></div><div class="map-hint">Tap a citizen to inspect</div></div>
-        <div class="live-strip"><span class="live-label"><i></i> LIVE FEED</span><div id="liveEvent" aria-live="polite">A new life begins: 18 citizens enter Echo City.</div><button type="button" id="nextEvent" aria-label="Show next live event">Next event <b>↗</b></button></div>
+    <main>
+      <section class="intro-band">
+        <div class="intro-copy">
+          <span class="eyebrow"><span class="eyebrow-mark"></span> محاكاة حيّة · الموسم الأول</span>
+          <h1>مدينةٌ صغيرة،<br /><em>وحيواتٌ لا تُحصى.</em></h1>
+          <p>ثمانية عشر شخصًا يتركون أثرهم كل يوم. اقترب من خريطتهم، واسمع ما لا يُقال.</p>
+        </div>
+        <div class="intro-note"><span class="note-index">٠١ / ١٨</span><span>تبدأ الحكاية<br />من هنا</span><i aria-hidden="true">↙</i></div>
       </section>
 
-      <aside class="inspector" aria-label="City information panel">
-        <nav class="inspector-tabs" role="tablist" aria-label="City information"><button class="tab-button is-active" role="tab" aria-selected="true" data-panel="citizens">Citizens <b id="citizenCount">18</b></button><button class="tab-button" role="tab" aria-selected="false" data-panel="poll">Poll</button><button class="tab-button" role="tab" aria-selected="false" data-panel="daily">Daily</button><button class="tab-button" role="tab" aria-selected="false" data-panel="bonds">Bonds</button><button class="tab-button" role="tab" aria-selected="false" data-panel="about">About</button><button class="tab-button utility-tab" role="tab" aria-selected="false" data-panel="history">History</button><button class="tab-button utility-tab" role="tab" aria-selected="false" data-panel="ranks">Ranks</button></nav>
-        <div class="panel-content" id="panelContent">
-          <section class="panel-view" data-panel-view="citizens"><div class="panel-heading"><div><span class="eyebrow">THE PEOPLE</span><h2>Citizens</h2></div><span class="panel-count" id="panelCount">18 / 18</span></div><p class="panel-intro">Eighteen private mornings. Select a citizen on the map or below to see what moves them.</p><div class="citizen-list" id="citizenList"></div></section>
-          <section class="panel-view" data-panel-view="poll" hidden><div class="panel-heading"><div><span class="eyebrow">COLLECTIVE CHOICE</span><h2>Poll</h2></div><span class="panel-count">DAY 01</span></div><p class="panel-intro" id="pollQuestion">What should Echo City build first?</p><div class="poll-list" id="pollList"></div><p class="micro-note" id="pollNote">One vote shifts the city. The poll closes at sunset.</p></section>
-          <section class="panel-view" data-panel-view="daily" hidden><div class="panel-heading"><div><span class="eyebrow">THE NEWSPAPER</span><h2>Daily</h2></div><span class="panel-count">ED. 001</span></div><div class="newspaper"><span class="news-kicker">ECHO CITY MORNING EDITION</span><h3 id="newsHeadline">A new city, written by its people.</h3><p id="newsSubhead">Season 01 · Day 01 · The first morning</p></div><div class="daily-list" id="dailyList"></div></section>
-          <section class="panel-view" data-panel-view="bonds" hidden><div class="panel-heading"><div><span class="eyebrow">WHO FEELS WHAT</span><h2>Bonds</h2></div><span class="panel-count">NETWORK</span></div><p class="panel-intro">Affection, rivalry, trust, and the small history between two people.</p><div class="bond-list" id="bondList"></div></section>
-          <section class="panel-view" data-panel-view="about" hidden><div class="panel-heading"><div><span class="eyebrow">THE PREMISE</span><h2>About</h2></div><span class="panel-count">v0.2</span></div><div class="about-copy"><p><strong>Echo City is not a story waiting to be told.</strong> It keeps moving when you look away.</p><p>Every citizen has a job, a body, a memory, a private belief, a need, and somebody they might protect.</p><div class="ai-card"><span class="ai-orb">✦</span><div><strong>AI mind conduit</strong><p id="aiProvider">Server-side provider is ready when you open a mind.</p></div></div><p class="legal-note">Original code, original procedural map, and original citizen identities. This is an independent simulation.</p></div></section>
-          <section class="panel-view" data-panel-view="history" hidden><div class="panel-heading"><div><span class="eyebrow">THE CITY REMEMBERS</span><h2>History</h2></div><span class="panel-count">SEASON 01</span></div><div class="history-hero"><strong id="historyTick">DAY 01</strong><span>Every tick leaves a trace.</span></div><div class="history-list" id="historyList"></div></section>
-          <section class="panel-view" data-panel-view="ranks" hidden><div class="panel-heading"><div><span class="eyebrow">THE LEADERBOARD</span><h2>Ranks</h2></div><span class="panel-count">LIVE</span></div><p class="panel-intro">Reputation shifts with every choice, friendship, and risk.</p><div class="rank-list" id="rankList"></div></section>
+      <section class="city-section" aria-label="خريطة المدينة الحية">
+        <div class="city-head">
+          <div><span class="section-kicker">المشهد الآن</span><h2 id="headline">صباحٌ أول على ضفاف الحكاية</h2></div>
+          <div class="city-head-meta"><span class="season-chip">الموسم <b id="seasonLabel">٠١</b></span><span class="weather-chip"><i class="weather-sun"></i><span id="weatherLabel">سماء صافية</span></span></div>
         </div>
-        <div class="mind-drawer" id="mindDrawer" hidden><div class="drawer-head"><div><span class="eyebrow">PRIVATE CHANNEL</span><h2 id="mindTitle">Talk to a mind</h2></div><button type="button" id="closeMind" aria-label="Close mind channel">×</button></div><div class="mind-messages" id="mindMessages"><div class="mind-bubble mind-bubble--system">You can speak to a citizen. They may listen. They may disagree.</div></div><form class="mind-form" id="mindForm"><input id="mindInput" maxlength="500" placeholder="Say something honest…" autocomplete="off" /><button type="submit">Send <b>↗</b></button></form><div class="mind-source" id="mindSource">AI stays server-side. No provider key reaches the browser.</div></div>
-      </aside>
+        <div class="map-frame" id="mapFrame">
+          <img class="city-art" id="cityArt" src="/assets/echo-city-map.webp" alt="مشهد مرسوم لمدينة صغيرة بين البحر والحدائق" fetchpriority="high" />
+          <div class="map-wash" aria-hidden="true"></div>
+          <div class="map-coordinate">خريطة تفاعلية <span>—</span> <b id="tickLabel">نبضة ٠٠٠٠</b></div>
+          <div id="cityMap" class="map-markers" role="group" aria-label="سكان المدينة على الخريطة"></div>
+          <div class="map-compass" aria-hidden="true"><span>شمال</span><i>↑</i></div>
+          <div class="map-legend"><span><i class="legend-person"></i> السكان</span><span><i class="legend-place"></i> أحياء المدينة</span></div>
+          <div class="map-hint">اختر علامةً لتقترب من حكاية صاحبها</div>
+        </div>
+        <div class="map-caption"><span><b class="live-dot"></b> المدينة تتحرّك معًا</span><span>آخر تحديث <b id="lastUpdate">—</b></span><button type="button" id="zoomButton" aria-pressed="false">تكبير الخريطة <b>＋</b></button></div>
+        <div class="live-story"><span class="story-label">من يومهم</span><p id="liveEvent" aria-live="polite">تستيقظ المدينة على مهل.</p><button type="button" id="nextEvent" aria-label="عرض الحكاية التالية">حكاية أخرى <b>←</b></button></div>
+      </section>
+
+      <section class="pulse-stats" aria-label="مؤشرات المدينة">
+        <article class="stat-card stat-card--green"><span class="stat-symbol">◉</span><div><small>من يسكنها</small><strong id="populationLabel">١٨ نسمة</strong></div><span class="stat-foot" id="citizenCount">١٨</span></article>
+        <article class="stat-card stat-card--sand"><span class="stat-symbol">◷</span><div><small>وقت المدينة</small><strong id="clockStat">—</strong></div><span class="stat-foot">كل نبضة ٥ دقائق</span></article>
+        <article class="stat-card stat-card--coral"><span class="stat-symbol">⌁</span><div><small>حكايات اليوم</small><strong id="eventStat">—</strong></div><span class="stat-foot">تُسجّل وتبقى</span></article>
+        <article class="stat-card stat-card--blue"><span class="stat-symbol">⌂</span><div><small>نبض العالم</small><strong>مشترك للجميع</strong></div><span class="stat-foot">من خادم المدينة</span></article>
+      </section>
+
+      <section class="community-section">
+        <div class="community-heading"><div><span class="section-kicker">دفتر المدينة</span><h2>ما الذي يهمّك اليوم؟</h2><p>تنقّل بين تفاصيل المدينة، وكل اختيار يفتح نافذةً مختلفة.</p></div><span class="heading-flourish" aria-hidden="true">✳</span></div>
+        <nav class="section-tabs" role="tablist" aria-label="أقسام المدينة">
+          <button class="tab-button is-active" role="tab" aria-selected="true" data-panel="citizens">أهل المدينة <b id="citizenTabCount">١٨</b></button>
+          <button class="tab-button" role="tab" aria-selected="false" data-panel="poll">رأي الناس</button>
+          <button class="tab-button" role="tab" aria-selected="false" data-panel="daily">صحيفة الصباح</button>
+          <button class="tab-button" role="tab" aria-selected="false" data-panel="bonds">ما بيننا</button>
+          <button class="tab-button" role="tab" aria-selected="false" data-panel="history">الذاكرة</button>
+          <button class="tab-button" role="tab" aria-selected="false" data-panel="ranks">الأثر</button>
+          <button class="tab-button" role="tab" aria-selected="false" data-panel="about">عن العالم</button>
+        </nav>
+        <div class="panel-content">
+          <section class="panel-view is-visible" data-panel-view="citizens">
+            <div class="panel-heading"><div><span class="eyebrow">وجوهٌ تعرف المكان</span><h3>سكان المدينة</h3><span class="panel-count" id="panelCount">١٨ / ١٨</span></div><label class="search-box"><span>⌕</span><input id="citizenSearch" type="search" placeholder="ابحث عن شخص…" aria-label="ابحث عن أحد السكان" /></label></div>
+            <p class="panel-intro">لكل شخصٍ عملٌ وذاكرةٌ صغيرة وأملٌ يسعى إليه.</p>
+            <div class="citizen-list" id="citizenList"></div>
+          </section>
+          <section class="panel-view" data-panel-view="poll" hidden><div class="panel-heading"><div><span class="eyebrow">قرارٌ يخصّ الجميع</span><h3>ماذا تحتاج المدينة أولًا؟</h3></div><span class="panel-count" id="pollDay">اليوم ٠١</span></div><p class="panel-intro" id="pollQuestion">صوتك جزءٌ من حكاية المكان.</p><div class="poll-list" id="pollList"></div><p class="micro-note" id="pollNote">صوتٌ واحد من هذا المتصفح لكل يوم.</p></section>
+          <section class="panel-view" data-panel-view="daily" hidden><div class="panel-heading"><div><span class="eyebrow">من مطبعة الحيّ</span><h3>صحيفة هذا الصباح</h3></div><span class="panel-count">العدد ٠٠١</span></div><article class="newspaper"><span class="news-kicker">صدى المدينة · صحيفة يومية</span><h4 id="newsHeadline">مدينةٌ تكتبها حكايات أهلها</h4><p id="newsSubhead">الموسم الأول · اليوم الأول</p></article><div class="daily-list" id="dailyList"></div></section>
+          <section class="panel-view" data-panel-view="bonds" hidden><div class="panel-heading"><div><span class="eyebrow">روابطٌ خفيّة</span><h3>ما بيننا</h3></div><span class="panel-count">شبكة العلاقات</span></div><p class="panel-intro">مودةٌ ومنافسةٌ وثقة، وتاريخٌ صغير بين شخصين.</p><div class="bond-list" id="bondList"></div></section>
+          <section class="panel-view" data-panel-view="history" hidden><div class="panel-heading"><div><span class="eyebrow">كل نبضة تترك أثرًا</span><h3>ذاكرة المدينة</h3></div><span class="panel-count" id="historyDay">—</span></div><div class="history-hero"><strong id="historyTick">—</strong><span>لا شيء يمضي دون أثر.</span></div><div class="history-list" id="historyList"></div></section>
+          <section class="panel-view" data-panel-view="ranks" hidden><div class="panel-heading"><div><span class="eyebrow">أثرٌ يتبدّل</span><h3>من ترك أثرًا اليوم؟</h3></div><span class="panel-count">مباشر</span></div><p class="panel-intro">تتغير المكانة مع كل اختيارٍ وصداقةٍ ومخاطرة.</p><div class="rank-list" id="rankList"></div></section>
+          <section class="panel-view" data-panel-view="about" hidden><div class="panel-heading"><div><span class="eyebrow">فكرة العالم</span><h3>حكايةٌ لا تتوقف عندك</h3></div><span class="panel-count">نسخة ١</span></div><div class="about-copy"><p><strong>صدى المدينة عالمٌ صغير، لكنه ليس حكايةً مكتوبة سلفًا.</strong> تستمرّ حيواته بينما تنظر، وتتغير حين تبتعد.</p><p>لكل شخصٍ عملٌ واحتياجٌ وذكرى ومعتقدٌ خاص؛ أما الحوار فيُولّد على جهاز الزائر عبر نموذج مفتوح، من دون مفتاحٍ سري.</p><div class="ai-card"><span class="ai-orb">✦</span><div><strong>مصدر الذكاء الاصطناعي</strong><p id="aiProvider">نموذج Qwen مفتوح يعمل في المتصفح عبر Hugging Face.</p></div></div><p class="legal-note">المدينة وشخصياتها ورسومها أصلية لهذا المشروع. يحمّل المتصفح أوزان النموذج العامة عند أول استخدام.</p></div></section>
+        </div>
+      </section>
+      <footer class="site-footer"><span>صدى المدينة <b>·</b> عالمٌ من حكاياتٍ صغيرة</span><span>تستمرّ المحاكاة على الخادم؛ وقد تحتاج الخدمة المستضافة إلى صيانة أو إعادة تشغيل.</span></footer>
     </main>
-    <div class="citizen-sheet" id="citizenSheet" hidden><div class="sheet-backdrop" id="sheetBackdrop"></div><article class="citizen-card" role="dialog" aria-modal="true" aria-label="Citizen profile"><button class="sheet-close" type="button" id="closeSheet">×</button><div id="citizenProfile"></div></article></div>
+
+    <div class="citizen-sheet" id="citizenSheet" hidden><button class="sheet-backdrop" id="sheetBackdrop" aria-label="إغلاق الملف"></button><article class="citizen-card" role="dialog" aria-modal="true" aria-label="ملف أحد سكان المدينة"><button class="sheet-close" type="button" id="closeSheet" aria-label="إغلاق">×</button><div id="citizenProfile"></div></article></div>
+    <aside class="mind-drawer" id="mindDrawer" role="dialog" aria-modal="true" aria-label="حديث مع أحد السكان" hidden><div class="drawer-head"><div><span class="eyebrow">حديثٌ على انفراد</span><h2 id="mindTitle">حديث مع أحد السكان</h2></div><button type="button" id="closeMind" aria-label="إغلاق نافذة الحديث">×</button></div><div class="mind-messages" id="mindMessages"><div class="mind-bubble mind-bubble--system">تحدّث معه كما لو التقيتما مصادفةً في الطريق.</div></div><form class="mind-form" id="mindForm"><input id="mindInput" maxlength="500" placeholder="اكتب ما تريد قوله…" autocomplete="off" aria-label="اكتب رسالتك" /><button type="submit">إرسال <b>←</b></button></form><div class="mind-source" id="mindSource">نموذج مفتوح · يعمل على جهازك · لا مفتاح مطلوب</div></aside>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </div>
   <script type="module" src="/app.js"></script>
